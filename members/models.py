@@ -6,5 +6,11 @@ class Member(CommonModel.CommonModel):
     nick_name = models.CharField(max_length=100,null=False)
     email = models.EmailField(null =False)
     birthday = models.DateField()
-    
+    gender_choices = (
+        (None,'Mid'),
+        (1,'Male'),
+        (2,'Female')
+
+    )
+    gender = models.NullBooleanField(choices=gender_choices)
     
