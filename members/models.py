@@ -7,10 +7,14 @@ class Member(CommonModel.CommonModel):
     email = models.EmailField(null =False)
     birthday = models.DateField()
     gender_choices = (
-        (None,'Mid'),
+        (0,'Secret'),
         (1,'Male'),
         (2,'Female')
 
     )
-    gender = models.NullBooleanField(choices=gender_choices)
-    
+    gender = models.SmallIntegerField(choices=gender_choices,default=0)
+    password = models.CharField(max_length=200,null=False,default='')
+class LoginLog(CommonModel.CommonModel):
+    member = models.ForeignKey(Member,on_delete=models.CASCADE
+    ,db_index=False)
+    login_ip = models.GenericIPAddressField()

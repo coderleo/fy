@@ -12,11 +12,14 @@ def register(request):
         
         if form.is_valid():
             #print(request.POST)
-            member = Member()
-            member.phone_number = form.cleaned_data['phone_number']
-            member.name = form.cleaned_data['name']
-            member.nick_name = form.cleaned_data['nick_name']
-            member.save()
+            #member = Member()
+            #member.phone_number = form.cleaned_data['phone_number']
+            #member.name = form.cleaned_data['name']
+            #member.nick_name = form.cleaned_data['nick_name']
+            #member.save()
+            print(222)
+            form.save()
+            print(123)
     else:
         form = RegisterForm()
     
