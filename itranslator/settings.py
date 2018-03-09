@@ -77,12 +77,8 @@ WSGI_APPLICATION = 'itranslator.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+      'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'itranslatordb',
-        'USER':'postgres',
-        'PASSWORD':'1',
-        'HOST':'127.0.0.1',
-        'PORT':'5432'
     }
 }
 
