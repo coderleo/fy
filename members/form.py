@@ -41,28 +41,31 @@ class RegisterForm(forms.ModelForm):
     #         self.add_error('email',self.error_messages['unique_email'])
     #     return self.cleaned_data
 
-class SignIn(forms.Form):
+class SignInForm(forms.Form):
+    email = forms.EmailField(
+        label = _('Email')
+    )
     password = forms.CharField(
         label = _('Password'),
         strip = False,
         widget = forms.PasswordInput,
     )
-class SignInViaEmailForm(SignIn):
-    field_order = ['email','password']
-    email = forms.EmailField(
-        label = _('Email'),
-        widget = forms.EmailInput(attrs={'placeholder':'@','autofocus':True})
-    )
+# class SignInViaEmailForm(SignIn):
+#     field_order = ['email','password']
+#     email = forms.EmailField(
+#         label = _('Email'),
+#         widget = forms.EmailInput(attrs={'placeholder':'@','autofocus':True})
+#     )
 
-    error_messages = {
-        'invalid_login':_('Please enter a correct email and password')
-    }
-    def clean(self):
-        cleaned_data = super(SignInViaEmailForm,self).clean()
-        email = cleaned_data.get('email','').lower()
-        password = cleaned_data.get('password','')
-        member = Member.objects.filter(email=email).first()
-        if member:
-            pass
-        else:
-            self.add_error('email',self.error_messages['invalid_login'])
+#     error_messages = {
+#         'invalid_login':_('Please enter a correct email and password')
+#     }
+#     def clean(self):
+#         cleaned_data = super(SignInViaEmailForm,self).clean()
+#         email = cleaned_data.get('email','').lower()
+#         password = cleaned_data.get('password','')
+#         member = Member.objects.filter(email=email).first()
+#         if member:
+#             pass
+#         else:
+#             self.add_error('email',self.error_messages['invalid_login'])

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .form import RegisterForm,SignInViaEmailForm
+from .form import RegisterForm,SignInForm
 from .models import Member
 from django.views.generic.edit import FormView
 # Create your views here.
@@ -22,11 +22,16 @@ def register(request):
     
     return render(request,'members/register.html',{'form':form})
 
-class SignIn(FormView):
-    template_name = 'members/login.html'
-    form_class = SignInViaEmailForm
-    success_url = 'index'
-    def form_valid(self,form):
-        return super().form_valid(form)
+def login(request):
+    if request.method == 'POST':
+        form = SignInForm(request.POST)
+        print(Member.check_password('aa','bb'))
+        # form.cleaned_data
+    else:
+        form = SignInForm()
+    return render(request,'members/login.html',{'form':form})
+
+
+   
 
     
