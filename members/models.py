@@ -21,12 +21,12 @@ class Member(CommonModel.CommonModel):
         self.password = hashers.make_password(password)
     @classmethod  
     def check_password(cls,email,password):
-        password = hashers.make_password(password)
-        m = Member.objects.filter(email='leo.penguin@yahoo.com').filter(password=password)
-        if m is None:
-            return False
-        else:
-            return True
+        
+        m = Member.objects.filter(email=email)
+        if len(m)>0:
+            if hashers.check_password(password,m[0].password):
+                return True
+        return False
 class LoginLog(CommonModel.CommonModel):
     member = models.ForeignKey(Member,on_delete=models.CASCADE
     ,db_index=False)

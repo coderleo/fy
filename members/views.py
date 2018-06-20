@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .form import RegisterForm,SignInForm
 from .models import Member
@@ -23,10 +23,16 @@ def register(request):
     return render(request,'members/register.html',{'form':form})
 
 def login(request):
+   
     if request.method == 'POST':
         form = SignInForm(request.POST)
-        print(Member.check_password('aa','bb'))
-        # form.cleaned_data
+        if form.is_valid():
+           
+            if Member.check_password(form.cleaned_data['email'],form.cleaned_data['password']):
+                # return render(request,'members/index.html')
+                return redirect('/members/')
+
+            # form.cleaned_data
     else:
         form = SignInForm()
     return render(request,'members/login.html',{'form':form})
